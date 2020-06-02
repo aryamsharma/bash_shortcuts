@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+import sys
+import os
+
+if len(sys.argv) == 1:
+    print("pc stands for please compile. \
+    Currently supports Python, C, C++, Racket.")
+    exit()
+
+args = sys.argv
+del args[0]
+
+final = []
+for arg in args:
+    if arg.lower() in ["-t", "time"]:
+        final.append("time")
+
+if args[0].endswith(".py"):
+    final.append("python3")
+
+    for arg in args[1:]:
+        if arg.lower() in ["-c", "-p", "-cp"]:
+            final.append("-m cProfile")
+            continue
+        final.append(arg)
+
+    final.append(args[0])
+
+elif args[0].endswith(".c"):
+    os.system(f"gcc {args[0]} -o {args[0][:-2]}")
+    final.append(f"./{args[0][:-2]}")
+
+elif args[0].endswith(".cpp"):
+    os.system(f"g++ {args[0]} -o {args[0][:-4]}")
+    final.append(f"./{args[0][:-4]}")
+
+elif args[0].endswith(".rkt"):
+    final.append("racket")
+
+    for arg in args[1:]:
+        final.append(arg)
+
+    final.append(args[0])
+
+os.system(" ".join(final))

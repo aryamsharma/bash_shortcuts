@@ -1,0 +1,18 @@
+#!/bin/bash
+# bar stands for Bulid And Run
+# toc sttand for type of compiler
+
+if [[ $1 == "++" ]]; then
+    g++ $2.cpp -o $2
+    ./$2
+
+elif [[ $1 == "+" ]]; then
+    ./$2
+
+elif [[ $1 == "//" ]]; then
+    gcc $2.c -o $2
+    ./$2
+
+else [[ $1 == "/" ]]
+    ./$2
+fi
