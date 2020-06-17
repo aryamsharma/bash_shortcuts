@@ -16,6 +16,14 @@ for arg in args:
     if arg.lower() in ["-t", "time"]:
         final.append("time")
 
+# Commands go like this (pc <filename> <options>) 
+"""
+pc Mytest.py
+pc Mytest.py -c 
+pc Mytest.py -c -t
+pc Mytest.py time
+""" 
+
 if args[0].endswith(".py"):
     final.append("python3")
 
